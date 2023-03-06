@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">my_travel_guide</string>
+    <!--    <string name="default_web_client_id">797673504916-qiek6cshsla6n9djs25esnsfvpo6suff.apps.googleusercontent.com</string>-->
+    <string name="repeat_pass">Repeat password</string>
+</resources>
