@@ -5,12 +5,16 @@ import android.util.Log
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 
 class Travel( id_travel: String ) {
     private val db = Firebase.firestore
+    lateinit private var step: TravelSteps
+
     lateinit var admin: String
-    lateinit var geoPoint: GeoPoint
+    lateinit var name: String
+    lateinit var steps: ArrayList<TravelSteps>
 
     init {
 
@@ -19,7 +23,9 @@ class Travel( id_travel: String ) {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     admin = document.data?.get("admin") as String
-                    geoPoint = document.getGeoPoint("coord")!!
+                    name = document.data?.get("name") as String
+                    step = document.data?.get("step") as TravelSteps
+                    steps.add(step)
                 } else {
                     Log.d(ContentValues.TAG, "No such document")
                 }
@@ -31,6 +37,12 @@ class Travel( id_travel: String ) {
 
     fun createTravel() {
 
+    }
+
+
+    class TravelSteps( geoPoint: GeoPoint, place: String ){
+        var coord: GeoPoint = geoPoint
+        var place: String = place
     }
 
 }
